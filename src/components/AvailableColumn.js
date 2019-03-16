@@ -1,11 +1,12 @@
 import React from 'react';
+import TableCell from '@material-ui/core/TableCell';
 
 function AvailableColumn(props){
 
   return (
-    <th>
+    <TableCell>
       Available
-    </th>
+    </TableCell>
   );
 }
 
