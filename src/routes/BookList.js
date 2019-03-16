@@ -8,6 +8,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class BookList extends Component {
   constructor(props){
@@ -17,8 +20,13 @@ class BookList extends Component {
                     books: []};
     }
 
-  sampleBooks = [{ISBN: 1, title: 'Harry Potter', author: 'J. K. Rowling'},
-                                {ISBN: 2, title: 'Rainbox Six', author: 'Tom Clancy'} ];
+  layout = {
+    marginTop:40
+  }
+
+  sampleBooks = [{ISBN: 1, title: 'Harry Potter', author: 'J. K. Rowling', status: 'available'},
+                {ISBN: 2, title: 'Rainbox Six', author: 'Tom Clancy', status: 'unavilable'},
+                {ISBN: 3, title: 'The Art of Awesomeness', author: 'Garnizzleman', status: 'available'}];
 
   componentDidMount() {
     fetch('http://api.openweathermap.org/data/2.5/forecast?appid=98f5e036c0166ea62d6efaa2d67b07b3&q=London')
@@ -38,7 +46,7 @@ class BookList extends Component {
     }
 
     return (
-      <Paper>
+      <Paper elevation={8} style={this.layout}>
         <Table>
           <TableHead>
             <TableRow>
@@ -56,12 +64,24 @@ class BookList extends Component {
                   title = {book.title}
                   author = {book.author}
                   available = {this.state.available}
-                  status = "available"
+                  status = {book.status}
                   />;
             })}
+            <TableRow>
+              <TableCell>
+                <Fab>
+                  <AddIcon />
+                </Fab>
+              </TableCell>
+              <TableCell>
+                <Fab>
+                  <DeleteIcon />
+                </Fab>
+              </TableCell>
+            </TableRow>
           </TableBody>
         </Table>
-        <Button color="primary" onClick = { () => {
+        <Button variant="outlined" color="primary" style={this.layout} onClick = { () => {
           this.setState({books: this.sampleBooks});
         }}>
         Load Books
