@@ -8,7 +8,8 @@ class MenuBar extends React.Component {
     ConditionalRender = () => {
         if (this.state.loggedIn){
             return (
-                <div className="ui teal secondary pointing menu">
+                <div className="ui blue secondary pointing menu">
+                    {this.appName()}
                     <NavLink to="/mybooks" className="item">My Books</NavLink>
                     <NavLink to="/books" className="item">Browse</NavLink>
                     <div className="right menu" style={{marginTop: 10, marginBottom: 5}}>
@@ -21,7 +22,8 @@ class MenuBar extends React.Component {
         }
         
         return (
-            <div className="ui teal secondary pointing menu">
+            <div className="ui blue secondary pointing menu">
+                {this.appName()}
                 <NavLink to="/books" className="item">Browse</NavLink>
                 <div className="right menu" style={{marginTop: 10, marginBottom: 5}}>
                     <NavLink to="/login"><button className="ui primary basic mini button">Register</button></NavLink>
@@ -30,6 +32,17 @@ class MenuBar extends React.Component {
             </div>
         );
         
+    }
+
+    appName = () => {
+        return (
+
+            <div className="header item">
+                <i class="book icon"></i>
+                BookBnB
+            </div>
+
+        );
     }
 
     render(){
