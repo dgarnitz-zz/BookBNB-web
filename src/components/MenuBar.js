@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 
 class MenuBar extends React.Component {
 
-    state = {loggedIn: false};
+    state = {loggedIn: true};
 
     ConditionalRender = () => {
         if (this.state.loggedIn){
