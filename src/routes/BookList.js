@@ -30,8 +30,14 @@ class BookList extends Component {
                 {ISBN: 3, title: 'The Art of Awesomeness', author: 'Garnizzleman', status: 'available'}];
 
   componentDidMount() {
-    axios.get('https://antondubek-bookbnb.herokuapp.com/book?command=all')
-      .then(data => {console.log(data)})
+    axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://antondubek-bookbnb.herokuapp.com/book?command=all`)
+      .then(
+        data => {
+          this.setState({hits: data.data,
+                          available: false});
+          console.log("checking state");
+          console.log(this.state.hits);
+        })
       .catch(function (error) {
         console.log(error);
       });
