@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import AvailableColumn from './../components/AvailableColumn';
 import BookListItem from './../components/BookListItem';
 import Button from '@material-ui/core/Button';
@@ -29,11 +30,11 @@ class BookList extends Component {
                 {ISBN: 3, title: 'The Art of Awesomeness', author: 'Garnizzleman', status: 'available'}];
 
   componentDidMount() {
-    fetch('http://api.openweathermap.org/data/2.5/forecast?appid=98f5e036c0166ea62d6efaa2d67b07b3&q=London')
-      .then(response => response.json())
-      .then(data => this.setState({ hits: data }));
-      console.log("this works");
-      console.log(this.state.hits);
+    axios.get('https://antondubek-bookbnb.herokuapp.com/book?command=all')
+      .then(data => {console.log(data)})
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   render() {
