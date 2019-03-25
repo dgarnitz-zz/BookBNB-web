@@ -9,13 +9,16 @@ import FormControl from '@material-ui/core/FormControl';
 class Login extends Component {
   constructor(props){
    super(props);
-   this.testLogin = this.testLogin.bind(this);
+
+   this.login = this.login.bind(this);
+   this.sampleData = {email: 'garnizzle@garnizzle.com',
+                password: 'garnizzle'};
   }
 
-  login() {
+  login(event) {
     axios.post(`${'https://cors-anywhere.herokuapp.com/'}https://antondubek-bookbnb.herokuapp.com/login`, {
-    email: 'garnizzle@garnizzle.com',
-    password: 'garnizzle'
+    email: event.target.email.value,
+    password: event.target.password.value
     })
     .then(response => {
       console.log(response);
@@ -23,11 +26,6 @@ class Login extends Component {
     .catch(error => {
       console.log(error);
     });
-  }
-
-  testLogin(event) {
-    console.log("testing login");
-    this.login();
     event.preventDefault();
   }
 
@@ -37,21 +35,18 @@ class Login extends Component {
         <Typography variant="h5" paragraph={true} className="login-prompt">
           Please Log In!
         </Typography>
-        <form className="login-form" onSubmit = {this.testLogin}>
+        <form className="login-form" onSubmit = {this.login}>
           <FormControl margin='dense'>
-            <TextField type="text" label="Email:" />
+            <TextField type="text" label="Email:" name="email" />
           </FormControl>
           <FormControl margin='dense'>
-            <TextField type="text" label="Password:" />
+            <TextField type="text" label="Password:" name="password" />
           </FormControl>
           <FormControl margin='dense'>
             <Button
               type="submit"
               variant="contained"
               color="primary"
-              onClick = { () => {
-                this.login();
-              }}
             >
               Login
             </Button>
