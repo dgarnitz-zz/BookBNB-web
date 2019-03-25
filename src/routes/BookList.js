@@ -33,10 +33,12 @@ class BookList extends Component {
     axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://antondubek-bookbnb.herokuapp.com/book?command=all`)
       .then(
         data => {
-          this.setState({hits: data.data,
+          console.log("current state:");
+          console.log(this.state.books);
+          this.setState({books: data.data,
                           available: false});
           console.log("checking state");
-          console.log(this.state.hits);
+          console.log(this.state.books);
         })
       .catch(function (error) {
         console.log(error);
@@ -89,9 +91,10 @@ class BookList extends Component {
           </TableBody>
         </Table>
         <Button variant="outlined" color="primary" style={this.layout} onClick = { () => {
-          this.setState({books: this.sampleBooks});
+          this.setState({available: true,
+                        books: this.sampleBooks});
         }}>
-        Load Books
+        Load Sample Books
         </ Button>
       </Paper>
     );
