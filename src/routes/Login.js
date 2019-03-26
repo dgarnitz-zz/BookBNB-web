@@ -5,8 +5,8 @@ import { AppBar } from "@material-ui/core";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import "../App.css";
 
 function TabContainer(props) {
   return (
@@ -20,13 +20,6 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const styles = theme => ({
-  root: {
-    width: 500,
-    align: "center"
-  }
-});
-
 class Login extends React.Component {
   state = {
     value: 0
@@ -37,11 +30,10 @@ class Login extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
     const { value } = this.state;
 
     return (
-      <div className={classes.root}>
+      <div className="login-tab-box">
         <AppBar position="static" color="default">
           <Tabs
             value={value}
@@ -70,8 +62,4 @@ class Login extends React.Component {
   }
 }
 
-Login.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(Login);
+export default Login;

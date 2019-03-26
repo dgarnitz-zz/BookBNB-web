@@ -77,7 +77,10 @@ class RegisterForm extends React.Component {
         >
           <Grid item xs={12}>
             <Typography variant="h5" paragraph={true}>
-              Register!
+              Please enter your details below
+            </Typography>
+            <Typography variant="h6" paragraph={true}>
+              *All fields are mandatory*
             </Typography>
           </Grid>
           <form
@@ -140,7 +143,7 @@ class RegisterForm extends React.Component {
             </Grid>
             <Grid item xs={3}>
               <Button
-                variant="outlined"
+                variant="contained"
                 type="submit"
                 color="primary"
                 className={classes.registerButton}

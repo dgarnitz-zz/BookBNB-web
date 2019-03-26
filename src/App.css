@@ -6,6 +6,13 @@
   text-align: center;
   margin: 4em;
   padding: 4em;
-  border: 2px solid #D3D3D3;
+  border: 2px solid #d3d3d3;
   border-radius: 2em;
+}
+
+.login-tab-box {
+  text-align: center;
+  margin: 4em;
+  padding: 4em;
+  width: 500px;
 }
