@@ -12,13 +12,16 @@ const styles = theme => ({
   },
   textField: {
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit,
+    width: 300
   },
   dense: {
     marginTop: 16
   },
-  menu: {
-    width: 200
+  registerButton: {
+    width: 200,
+    marginTop: 16,
+    marginLeft: theme.spacing.unit * 7
   }
 });
 
@@ -140,7 +143,7 @@ class RegisterForm extends React.Component {
                 variant="outlined"
                 type="submit"
                 color="primary"
-                className={classes.button}
+                className={classes.registerButton}
               >
                 Register
               </Button>
