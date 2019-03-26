@@ -14,7 +14,7 @@ function FollowingItem(props){
           variant="outlined"
           color="primary"
           onClick={() => {
-            console.log(props.id);
+            console.log("Testing button for user: " + props.id);
           }}
         >
           Manage
