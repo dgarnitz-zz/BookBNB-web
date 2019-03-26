@@ -97,7 +97,8 @@ class BookList extends Component {
             <TableRow>
               <TableCell>
                 <Fab>
-                  <AddIcon />
+                  <AddIcon/>
+                  <a href="/addbook" > test </a>
                 </Fab>
               </TableCell>
               <TableCell>
