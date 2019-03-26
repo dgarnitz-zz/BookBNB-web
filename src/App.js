@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './routes/Login';
 import BookList from './routes/BookList';
 import MenuBar from './components/MenuBar';
-import MenuBarMat from "./components/MenuBarMat";
+import Profile from "./routes/Profile";
 import './App.css';
 
 class App extends Component {
@@ -11,11 +11,11 @@ class App extends Component {
     return (
         <Router>
           <div className="ui container">
-            <MenuBarMat/>
             <MenuBar/>
             <Switch>
               <Route exact path = "/login" component = { Login } />
               <Route exact path = "/books" component = { BookList } />
+              <Route exact path = "/profile" component = { Profile } />
             </Switch>
           </div>
         </Router>

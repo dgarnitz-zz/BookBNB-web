@@ -1,53 +1,125 @@
-import React from 'react';
-import {NavLink} from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import { NavLink } from "react-router-dom";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import BookIcon from "@material-ui/icons/LibraryBooks";
+import AccountIcon from "@material-ui/icons/AccountCircle";
+import classNames from "classnames";
 
-class MenuBar extends React.Component {
+const styles = {
+  root: {
+    flexGrow: 1
+  },
+  grow: {
+    flexGrow: 1
+  }
+};
 
-    state = {loggedIn: true};
+function MenuBarMat(props) {
+  const { classes } = props;
 
-    ConditionalRender = () => {
-        if (this.state.loggedIn){
-            return (
-                <div className="ui blue secondary pointing menu">
-                    {this.appName()}
-                    <NavLink to="/mybooks" className="item">My Books</NavLink>
-                    <NavLink to="/books" className="item">Browse</NavLink>
-                    <div className="right menu" style={{marginTop: 10, marginBottom: 5}}>
-                        <div class="ui labeled icon buttons mini">
-                            <button class="ui primary basic button"><i class="user icon"></i>Profile</button>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-        
-        return (
-            <div className="ui blue secondary pointing menu">
-                {this.appName()}
-                <NavLink to="/books" className="item">Browse</NavLink>
-                <div className="right menu" style={{marginTop: 10, marginBottom: 5}}>
-                    <NavLink to="/login"><button className="ui primary basic mini button">Register</button></NavLink>
-                    <NavLink to="/login"><button className="ui basic mini button">Login</button></NavLink>
-                </div>
-            </div>
-        );
-        
-    }
+  const loggedIn = true;
 
-    appName = () => {
-        return (
+  if (loggedIn) {
+    return (
+      <div className={classes.root}>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <BookIcon className={classes.icon} />
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+              BookBnB
+            </Typography>
 
-            <div className="header item">
-                <i class="book icon"></i>
-                BookBnB
-            </div>
+            <NavLink to="/books">
+              <Button
+                color="default"
+                className={classes.button}
+                style={{ marginRight: 5 }}
+              >
+                Browse
+              </Button>
+            </NavLink>
+            <NavLink to="/mybooks">
+              <Button
+                color="default"
+                className={classes.button}
+                style={{ marginRight: 355 }}
+              >
+                MyBooks
+              </Button>
+            </NavLink>
 
-        );
-    }
+            <NavLink to="/profile">
+              <Button
+                variant="contained"
+                size="small"
+                className={classes.button}
+              >
+                <AccountIcon
+                  className={classNames(classes.leftIcon, classes.iconSmall)}
+                  style={{ marginRight: 3 }}
+                />
+                Profile
+              </Button>
+            </NavLink>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 
-    render(){
-        return this.ConditionalRender();
-    }
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" color="default">
+        <Toolbar>
+          <BookIcon className={classes.icon} />
+          <Typography variant="h6" color="inherit" className={classes.grow}>
+            BookBnB
+          </Typography>
+
+          <NavLink to="/books">
+            <Button
+              color="default"
+              className={classes.button}
+              style={{ marginRight: 355 }}
+            >
+              Browse
+            </Button>
+          </NavLink>
+
+          <NavLink to="/login">
+            <Button
+              variant="outlined"
+              size="small"
+              color="primary"
+              className={classes.button}
+            >
+              Register
+            </Button>
+          </NavLink>
+
+          <NavLink to="/login">
+            <Button
+              variant="outlined"
+              size="small"
+              color="default"
+              className={classes.button}
+            >
+              Login
+            </Button>
+          </NavLink>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
 
-export default MenuBar;
+MenuBarMat.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(MenuBarMat);
