@@ -1,57 +1,62 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import '../App.css';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
+import React from "react";
+import LoginForm from "../components/LoginForm";
+import RegisterForm from "../components/RegisterForm";
+import { AppBar } from "@material-ui/core";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import PropTypes from "prop-types";
+import Typography from "@material-ui/core/Typography";
+import "../App.css";
 
-class Login extends Component {
-  constructor(props){
-   super(props);
+function TabContainer(props) {
+  return (
+    <Typography component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
+    </Typography>
+  );
+}
 
-   this.login = this.login.bind(this);
-   this.sampleData = {email: 'garnizzle@garnizzle.com',
-                password: 'garnizzle'};
-  }
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
-  login(event) {
-    axios.post(`${'https://cors-anywhere.herokuapp.com/'}https://antondubek-bookbnb.herokuapp.com/login`, {
-    email: event.target.email.value,
-    password: event.target.password.value
-    })
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-    event.preventDefault();
-  }
+class Login extends React.Component {
+  state = {
+    value: 0
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
 
   render() {
+    const { value } = this.state;
+
     return (
-      <div className = "login-wrapper">
-        <Typography variant="h5" paragraph={true} className="login-prompt">
-          Please Log In!
-        </Typography>
-        <form className="login-form" onSubmit = {this.login}>
-          <FormControl margin='dense'>
-            <TextField type="text" label="Email:" name="email" />
-          </FormControl>
-          <FormControl margin='dense'>
-            <TextField type="text" label="Password:" name="password" />
-          </FormControl>
-          <FormControl margin='dense'>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-            >
-              Login
-            </Button>
-          </FormControl>
-        </form>
+      <div className="login-tab-box">
+        <AppBar position="static" color="default">
+          <Tabs
+            value={value}
+            onChange={this.handleChange}
+            variant="fullWidth"
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="Login" />
+            <Tab label="Register" />
+          </Tabs>
+        </AppBar>
+        {value === 0 && (
+          <TabContainer>
+            <LoginForm />
+          </TabContainer>
+        )}
+        {value === 1 && (
+          <TabContainer>
+            <RegisterForm />
+          </TabContainer>
+        )}
       </div>
     );
   }
