@@ -14,3 +14,10 @@
   margin-left: 15%;
   margin-right: 15%;
 }
+
+.login-tab-box {
+  text-align: center;
+  margin: 4em;
+  padding: 4em;
+  width: 500px;
+}
