@@ -9,13 +9,10 @@ import FollowingItem from "./FollowingItem";
 
 
 class Following extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { followers: [
-      {name: 'Garnizzle', city: 'Garnizzle Town', rating: 4.5, id: 2},
-      {name: 'Ant', city: 'Newcastle', rating: 1, id: 5}
-    ] };
-  }
+  state = { followers: [
+    {name: 'Garnizzle', city: 'Garnizzle Town', rating: 4.5, id: 2},
+    {name: 'Ant', city: 'Newcastle', rating: 1, id: 5}
+  ] };
 
   render() {
     return (
