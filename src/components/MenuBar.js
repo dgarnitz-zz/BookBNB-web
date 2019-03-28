@@ -34,7 +34,7 @@ function MenuBarMat(props) {
               BookBnB
             </Typography>
 
-            <NavLink to="/books">
+            <NavLink to="/book">
               <Button
                 color="default"
                 className={classes.button}

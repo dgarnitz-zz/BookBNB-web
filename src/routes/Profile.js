@@ -1,30 +1,43 @@
-import React from 'react';
-import Axios from 'axios';
+import React from "react";
+import axios from "axios";
 
 class Profile extends React.Component {
+  state = { email: "", name: "", city: "" };
 
-    state = {email: "", name: "", city: ""}
+  componentDidMount() {
+    this.getUserData();
+  }
 
-    componentDidMount(){
-        this.getUserData();
-    }
+  getUserData = () => {
+    axios
+      .post(
+        `${"https://cors-anywhere.herokuapp.com/"}https://antondubek-bookbnb.herokuapp.com/profile`,
+        {
+          email: "jim@bob.com"
+        }
+      )
+      .then(response => {
+        console.log(response);
+        this.setState({
+          name: response.data.name,
+          email: response.data.email,
+          city: response.data.city
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
-    getUserData = async (term) => {
-
-        const response = await Axios.post(
-            "http://localhost:8080/profile",
-            {
-                email: "test@amakepeace.com"
-            }
-        );
-
-        console.log(response.data.results);
-    }
-
-    render() {
-        return <div>Profile Page</div>
-    }
-
+  render() {
+    return (
+      <div>
+        <div>Name: {this.state.name}</div>
+        <div>email: {this.state.email}</div>
+        <div>City: {this.state.city}</div>
+      </div>
+    );
+  }
 }
 
 export default Profile;
