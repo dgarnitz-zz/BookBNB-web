@@ -5,6 +5,28 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
+import Grid from "@material-ui/core/Grid";
+import classNames from "classnames";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+  container: {
+    flexGrow: 1
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 300
+  },
+  dense: {
+    marginTop: 16
+  },
+  registerButton: {
+    width: 200,
+    marginTop: 16,
+    marginLeft: theme.spacing.unit * 7
+  }
+});
 
 class LoginForm extends Component {
   constructor(props) {
@@ -44,27 +66,60 @@ class LoginForm extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <div className="login-wrapper">
-        <Typography variant="h5" paragraph={true} className="login-prompt">
-          Please Log In!
-        </Typography>
-        <form className="login-form" onSubmit={this.login}>
-          <FormControl margin="dense">
-            <TextField type="text" label="Email:" name="email" />
-          </FormControl>
-          <FormControl margin="dense">
-            <TextField type="text" label="Password:" name="password" />
-          </FormControl>
-          <FormControl margin="dense">
-            <Button type="submit" variant="contained" color="primary">
-              Login
-            </Button>
-          </FormControl>
-        </form>
+      <div className={classes.root}>
+        <Grid
+          container
+          spacing={16}
+          direction="column"
+          justify="space-evenly"
+          alignItems="center"
+        >
+          <Grid item xs={12}>
+            <Typography variant="h5" paragraph={true} className="login-prompt">
+              Please Log In!
+            </Typography>
+          </ Grid>
+          <form className={classes.container} onSubmit={this.login}>
+            <Grid item xs={6}>
+              <FormControl margin="dense">
+                <TextField
+                  type="text"
+                  label="Email:"
+                  name="email"
+                  className = {classNames(classes.textField, classes.dense)}
+                  />
+              </FormControl>
+            </ Grid>
+            <Grid item xs={6}>
+              <FormControl margin="dense">
+                <TextField
+                  type="text"
+                  label="Password:"
+                  name="password"
+                  className = {classNames(classes.textField, classes.dense)}
+                  />
+              </FormControl>
+            </ Grid>
+            <Grid item xs={6}>
+              <FormControl margin="dense">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className={classes.registerButton}
+                  >
+                  Login
+                </Button>
+              </FormControl>
+            </ Grid>
+          </form>
+        </ Grid>
       </div>
     );
   }
 }
 
-export default LoginForm;
+export default withStyles(styles)(LoginForm);

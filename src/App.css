@@ -21,3 +21,10 @@
   padding: 4em;
   width: 500px;
 }
+
+.followers-tab-box {
+  text-align: center;
+  margin: 2em;
+  padding: 2em;
+  width: 80%;
+}
