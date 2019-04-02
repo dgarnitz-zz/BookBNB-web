@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./App.css";
 import Login from "./routes/Login";
 import BookList from "./routes/BookList";
 import Followers from "./routes/Followers";
 import MenuBar from "./components/MenuBar";
 import Profile from "./routes/Profile";
 import "./App.css";
+import RegisterForm from "./components/RegisterForm";
+import AddBook from "./routes/AddBook";
 
 class App extends Component {
   render() {
@@ -18,6 +21,7 @@ class App extends Component {
             <Route exact path="/book" component={BookList} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/followers" component={Followers} />
+            <Route exact path="/addbook" component={AddBook} />
           </Switch>
         </div>
       </Router>

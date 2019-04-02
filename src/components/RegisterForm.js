@@ -31,11 +31,6 @@ class RegisterForm extends React.Component {
   onFormSubmit = event => {
     event.preventDefault();
 
-    console.log(this.state.name);
-    console.log(this.state.email);
-    console.log(this.state.password);
-    console.log(this.state.city);
-
     this.sendPostRequest();
   };
 
