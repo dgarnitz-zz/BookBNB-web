@@ -29,9 +29,23 @@ class AddBook extends Component {
   onFormSubmit = event => {
     event.preventDefault();
 
-    console.log(event.target.isbn.value);
-    console.log(event.target.title.value);
-    console.log(event.target.author.value);
+    axios
+      .post(
+        `${"https://cors-anywhere.herokuapp.com/"}https://antondubek-bookbnb.herokuapp.com/profile/addBook`,
+        {
+          ISBN: event.target.isbn.value,
+          title: event.target.title.value,
+          author: event.target.author.value,
+          edition: event.target.edition.value,
+          email: event.target.email.value
+        }
+      )
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   render() {
@@ -79,6 +93,24 @@ class AddBook extends Component {
                 <TextField
                   name="author"
                   label="Author"
+                  className={classNames(classes.textField, classes.dense)}
+                  margin="dense"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  name="edition"
+                  label="Edition"
+                  className={classNames(classes.textField, classes.dense)}
+                  margin="dense"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  name="email"
+                  label="Email (REMOVE THIS)"
                   className={classNames(classes.textField, classes.dense)}
                   margin="dense"
                   variant="outlined"
