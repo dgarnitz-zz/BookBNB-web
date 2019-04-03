@@ -150,17 +150,16 @@ class RegisterForm extends React.Component {
                 Register
               </Button>
             </Grid>
+            <Grid item xs={6}>
+              <Typography
+                variant="body1"
+                color="error"
+                className={classNames(classes.textField)}
+              >
+                {this.state.errorMsg}
+              </Typography>
+            </Grid>
           </form>
-          <Grid item xs={6}>
-            <Typography
-              variant="h6"
-              color="error"
-              paragraph={true}
-              className={classNames(classes.textField)}
-            >
-              {this.state.errorMsg}
-            </Typography>
-          </Grid>
         </Grid>
       </div>
     );

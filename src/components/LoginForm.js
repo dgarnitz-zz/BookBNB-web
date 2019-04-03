@@ -126,8 +126,8 @@ class LoginForm extends Component {
             </Grid>
             <Grid item xs={6}>
               <Typography
-                variant="h6"
                 color="error"
+                variant="body1"
                 className={classNames(classes.textField)}
               >
                 {this.state.errorMsg}
