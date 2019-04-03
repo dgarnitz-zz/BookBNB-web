@@ -8,8 +8,6 @@ import MenuBar from "./components/MenuBar";
 import Profile from "./routes/Profile";
 import AddBook from "./routes/AddBook";
 import "./App.css";
-import RegisterForm from "./components/RegisterForm";
-import AddBook from "./routes/AddBook";
 
 class App extends Component {
   render() {
