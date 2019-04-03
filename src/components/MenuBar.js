@@ -16,7 +16,7 @@ const styles = {
 
 function heading(classes) {
   return (
-    <NavLink to="/">
+    <NavLink to="/book">
       <Button size="medium" className={classes.button} size="large">
         <BookIcon
           className={classNames(classes.leftIcon, classes.iconMedium)}
@@ -34,7 +34,7 @@ function heading(classes) {
 
 function browseBtn(classes) {
   return (
-    <NavLink to="/books">
+    <NavLink to="/book">
       <Button
         color="default"
         variant="outlined"
