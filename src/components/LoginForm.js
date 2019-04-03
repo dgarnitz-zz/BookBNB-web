@@ -38,6 +38,8 @@ class LoginForm extends Component {
       email: "garnizzle@garnizzle.com",
       password: "garnizzle"
     };
+
+    console.log(this.props.email);
   }
 
   login(event) {
@@ -63,7 +65,7 @@ class LoginForm extends Component {
       .then(response => {
         console.log(response);
         if (response.status === 200) {
-          bake_cookie("cookie", email);
+          this.props.email(email);
         }
       })
       .catch(error => {

@@ -25,7 +25,10 @@ function MenuBarMat(props) {
 
   var loggedIn = false;
 
-  if (read_cookie("cookie") !== "") {
+  console.log("Menu Bar Re-rendered");
+  console.log(read_cookie("email"));
+
+  if (typeof read_cookie("email") === "string") {
     loggedIn = true;
   }
 

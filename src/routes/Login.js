@@ -49,12 +49,12 @@ class Login extends React.Component {
         </AppBar>
         {value === 0 && (
           <TabContainer>
-            <LoginForm />
+            <LoginForm email={this.props.email} />
           </TabContainer>
         )}
         {value === 1 && (
           <TabContainer>
-            <RegisterForm />
+            <RegisterForm email={this.props.email} />
           </TabContainer>
         )}
       </div>

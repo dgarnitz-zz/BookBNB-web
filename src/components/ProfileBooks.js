@@ -18,7 +18,7 @@ class ProfileBooks extends React.Component {
   }
 
   getBookData = () => {
-    var email = read_cookie("cookie");
+    var email = read_cookie("email");
 
     axios
       .post(

@@ -54,7 +54,7 @@ class RegisterForm extends React.Component {
       .then(response => {
         console.log(response);
         if (response.status === 200) {
-          bake_cookie("cookie", this.state.email);
+          this.props.email(this.state.email);
         }
       })
       .catch(error => {
