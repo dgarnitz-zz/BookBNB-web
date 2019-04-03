@@ -5,7 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import { Grid, Button, Typography } from "@material-ui/core";
 import axios from "axios";
-import { bake_cookie } from "sfcookies";
 
 const styles = theme => ({
   container: {
@@ -27,7 +26,7 @@ const styles = theme => ({
 });
 
 class RegisterForm extends React.Component {
-  state = { name: "", email: "", password: "", city: "" };
+  state = { name: "", email: "", password: "", city: "", errorMsg: "test" };
 
   onFormSubmit = event => {
     event.preventDefault();
@@ -59,6 +58,7 @@ class RegisterForm extends React.Component {
       })
       .catch(error => {
         console.log(error);
+        this.setState({ errorMsg: "Registration failed" });
       });
   };
 
@@ -88,7 +88,7 @@ class RegisterForm extends React.Component {
             autoComplete="off"
             onSubmit={this.onFormSubmit}
           >
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <TextField
                 id="name-input"
                 label="Name"
@@ -100,7 +100,7 @@ class RegisterForm extends React.Component {
               />
             </Grid>
 
-            <Grid item xs={10}>
+            <Grid item xs={6}>
               <TextField
                 id="email-input"
                 label="Email"
@@ -115,7 +115,7 @@ class RegisterForm extends React.Component {
               />
             </Grid>
 
-            <Grid item xs={8}>
+            <Grid item xs={6}>
               <TextField
                 id="password-input"
                 label="Password"
@@ -140,7 +140,7 @@ class RegisterForm extends React.Component {
                 value={this.state.city}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6}>
               <Button
                 variant="contained"
                 type="submit"
@@ -151,6 +151,16 @@ class RegisterForm extends React.Component {
               </Button>
             </Grid>
           </form>
+          <Grid item xs={6}>
+            <Typography
+              variant="h6"
+              color="error"
+              paragraph={true}
+              className={classNames(classes.textField)}
+            >
+              {this.state.errorMsg}
+            </Typography>
+          </Grid>
         </Grid>
       </div>
     );

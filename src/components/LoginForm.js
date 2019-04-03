@@ -8,7 +8,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
-import { bake_cookie } from "sfcookies";
+import { red } from "@material-ui/core/colors";
 
 const styles = theme => ({
   container: {
@@ -33,13 +33,13 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { errorMsg: "" };
+
     this.login = this.login.bind(this);
     this.sampleData = {
       email: "garnizzle@garnizzle.com",
       password: "garnizzle"
     };
-
-    console.log(this.props.email);
   }
 
   login(event) {
@@ -70,6 +70,7 @@ class LoginForm extends Component {
       })
       .catch(error => {
         console.log(error);
+        this.setState({ errorMsg: "Email or password not recognised" });
       });
   }
 
@@ -122,6 +123,15 @@ class LoginForm extends Component {
                   Login
                 </Button>
               </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                variant="h6"
+                color="error"
+                className={classNames(classes.textField)}
+              >
+                {this.state.errorMsg}
+              </Typography>
             </Grid>
           </form>
         </Grid>
