@@ -24,7 +24,7 @@ class ProfileBooks extends React.Component {
       .post(
         `${"https://cors-anywhere.herokuapp.com/"}https://antondubek-bookbnb.herokuapp.com/profile/books`,
         {
-          email: "test@amakepeace.com"
+          email: email
         }
       )
       .then(response => {

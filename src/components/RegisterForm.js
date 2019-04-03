@@ -26,7 +26,7 @@ const styles = theme => ({
 });
 
 class RegisterForm extends React.Component {
-  state = { name: "", email: "", password: "", city: "", errorMsg: "test" };
+  state = { name: "", email: "", password: "", city: "", errorMsg: "" };
 
   onFormSubmit = event => {
     event.preventDefault();

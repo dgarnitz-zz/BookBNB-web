@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import PropTypes, { func } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { NavLink } from "react-router-dom";
 import BookIcon from "@material-ui/icons/LibraryBooks";
@@ -14,10 +14,43 @@ const styles = {
   }
 };
 
+function heading(classes) {
+  return (
+    <NavLink to="/">
+      <Button size="medium" className={classes.button} size="large">
+        <BookIcon
+          className={classNames(classes.leftIcon, classes.iconMedium)}
+          style={{ margin: 3 }}
+        />
+        BookBnB
+        <BookIcon
+          className={classNames(classes.rightIcon, classes.iconMedium)}
+          style={{ margin: 3 }}
+        />
+      </Button>
+    </NavLink>
+  );
+}
+
+function browseBtn(classes) {
+  return (
+    <NavLink to="/books">
+      <Button
+        color="default"
+        variant="outlined"
+        className={classes.button}
+        size="large"
+      >
+        Browse
+      </Button>
+    </NavLink>
+  );
+}
+
 function MenuBarMat(props) {
   const { classes } = props;
 
-  var loggedIn = true;
+  var loggedIn = false;
 
   if (typeof read_cookie("email") === "string") {
     loggedIn = true;
@@ -28,36 +61,17 @@ function MenuBarMat(props) {
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Toolbar>
-            <Grid container direction="row" alignContent="center">
-              <Grid item xs={3}>
-                <BookIcon className={classes.icon} />
-              </Grid>
+            <Grid container>
+              <Grid>{heading(classes)}</Grid>
 
-              <Grid item xs={3}>
-                <Typography variant="h6" color="inherit">
-                  BookBnB
-                </Typography>
-              </Grid>
+              <Grid>{browseBtn(classes)}</Grid>
 
-              <Grid item xs={3}>
-                <NavLink to="/book">
-                  <Button
-                    color="default"
-                    className={classes.button}
-                    style={{ marginRight: 5 }}
-                    size="large"
-                  >
-                    Browse
-                  </Button>
-                </NavLink>
-              </Grid>
-
-              <Grid item xs={3}>
+              <Grid>
                 <NavLink to="/mybooks">
                   <Button
                     color="default"
                     className={classes.button}
-                    style={{ marginRight: 355 }}
+                    variant="outlined"
                     size="large"
                   >
                     MyBooks
@@ -66,15 +80,16 @@ function MenuBarMat(props) {
               </Grid>
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid>
               <NavLink to="/profile">
                 <Button
-                  variant="contained"
-                  size="medium"
+                  variant="outlined"
+                  size="large"
                   className={classes.button}
                 >
                   <AccountIcon
                     className={classNames(classes.leftIcon, classes.iconMedium)}
+                    style={{ marginRight: 5 }}
                   />
                   Profile
                 </Button>
@@ -87,45 +102,41 @@ function MenuBarMat(props) {
   }
 
   return (
-    <div className={classes.root}>
+    <div>
       <AppBar position="static" color="default">
         <Toolbar>
-          <BookIcon className={classes.icon} />
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            BookBnB
-          </Typography>
+          <Grid container>
+            <Grid>{heading(classes)}</Grid>
 
-          <NavLink to="/books">
-            <Button
-              color="default"
-              className={classes.button}
-              style={{ marginRight: 355 }}
-            >
-              Browse
-            </Button>
-          </NavLink>
+            <Grid>{browseBtn(classes)}</Grid>
+          </Grid>
 
-          <NavLink to="/login">
-            <Button
-              variant="outlined"
-              size="small"
-              color="primary"
-              className={classes.button}
-            >
-              Register
-            </Button>
-          </NavLink>
+          <Grid>
+            <NavLink to="/login">
+              <Button
+                variant="outlined"
+                size="large"
+                color="primary"
+                className={classes.button}
+              >
+                Register
+              </Button>
+            </NavLink>
+          </Grid>
 
-          <NavLink to="/login">
-            <Button
-              variant="outlined"
-              size="small"
-              color="default"
-              className={classes.button}
-            >
-              Login
-            </Button>
-          </NavLink>
+          <Grid>
+            <NavLink to="/login">
+              <Button
+                variant="outlined"
+                size="large"
+                color="default"
+                className={classes.button}
+                style={{ margin: 5 }}
+              >
+                Login
+              </Button>
+            </NavLink>
+          </Grid>
         </Toolbar>
       </AppBar>
     </div>
