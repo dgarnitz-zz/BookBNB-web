@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import BookIcon from "@material-ui/icons/LibraryBooks";
 import AccountIcon from "@material-ui/icons/AccountCircle";
 import classNames from "classnames";
+import { read_cookie } from "sfcookies";
 
 const styles = {
   root: {
@@ -22,7 +23,11 @@ const styles = {
 function MenuBarMat(props) {
   const { classes } = props;
 
-  const loggedIn = true;
+  var loggedIn = false;
+
+  if (read_cookie("cookie") !== "") {
+    loggedIn = true;
+  }
 
   if (loggedIn) {
     return (

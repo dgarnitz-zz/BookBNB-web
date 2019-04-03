@@ -8,9 +8,13 @@ import MenuBar from "./components/MenuBar";
 import Profile from "./routes/Profile";
 import AddBook from "./routes/AddBook";
 import "./App.css";
+import { bake_cookie } from "sfcookies";
 
 class App extends Component {
   render() {
+    const cookie = "cookie";
+    bake_cookie(cookie, "");
+
     return (
       <Router>
         <div className="container">

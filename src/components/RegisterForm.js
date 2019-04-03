@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import { Grid, Button, Typography } from "@material-ui/core";
 import axios from "axios";
+import { bake_cookie } from "sfcookies";
 
 const styles = theme => ({
   container: {
@@ -52,6 +53,9 @@ class RegisterForm extends React.Component {
       )
       .then(response => {
         console.log(response);
+        if (response.status === 200) {
+          bake_cookie("cookie", this.state.email);
+        }
       })
       .catch(error => {
         console.log(error);

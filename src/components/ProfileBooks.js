@@ -8,28 +8,29 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import { read_cookie } from "sfcookies";
 
 class ProfileBooks extends React.Component {
-  state = { books: [
-    {copyID: '', title: '', author: '', status: ''}
-  ]};
+  state = { books: [{ copyID: "", title: "", author: "", status: "" }] };
 
   componentDidMount() {
     this.getBookData();
   }
 
   getBookData = () => {
+    var email = read_cookie("cookie");
+
     axios
       .post(
         `${"https://cors-anywhere.herokuapp.com/"}https://antondubek-bookbnb.herokuapp.com/profile/books`,
         {
-          email: 'test@amakepeace.com'
+          email: "test@amakepeace.com"
         }
       )
       .then(response => {
         console.log(response);
         this.setState({
-          books: response.data,
+          books: response.data
         });
       })
       .catch(error => {
@@ -42,7 +43,6 @@ class ProfileBooks extends React.Component {
   };
 
   render() {
-
     return (
       <Paper elevation={8} style={this.layout}>
         <Table>
