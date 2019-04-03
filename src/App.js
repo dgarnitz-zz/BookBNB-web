@@ -5,6 +5,7 @@ import BookList from "./routes/BookList";
 import Followers from "./routes/Followers";
 import MenuBar from "./components/MenuBar";
 import Profile from "./routes/Profile";
+import AddBook from "./routes/AddBook";
 import "./App.css";
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
             <Route exact path="/book" component={BookList} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/followers" component={Followers} />
+            <Route exact path="/addbook" component={AddBook} />
           </Switch>
         </div>
       </Router>

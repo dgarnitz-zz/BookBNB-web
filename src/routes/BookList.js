@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import AvailableColumn from "./../components/AvailableColumn";
 import BookListItem from "./../components/BookListItem";
-import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -14,10 +12,7 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 class BookList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { books: [] };
-  }
+  state = { books: [] };
 
   layout = {
     marginTop: 40
@@ -30,8 +25,6 @@ class BookList extends Component {
       )
       .then(data => {
         this.setState({ books: data.data});
-        console.log("checking state");
-        console.log(this.state.books);
       })
       .catch(function(error) {
         console.log(error);

@@ -7,8 +7,10 @@ function BookListItem(props){
   if(props.status) {
     if(props.available){
       availableColumn = <TableCell>Yes</TableCell>;
-    } else {
+    } else if(props.available != null && !props.available) {
       availableColumn = <TableCell>No</TableCell>;
+    } else {
+      availableColumn = <TableCell></TableCell>;
     }
   }
 
