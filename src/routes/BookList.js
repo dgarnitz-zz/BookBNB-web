@@ -56,6 +56,22 @@ class BookList extends Component {
                 />
               );
             })}
+<<<<<<< HEAD
+=======
+            <TableRow>
+              <TableCell>
+                <Fab>
+                  <AddIcon/>
+                  <a href="/addbook" > test </a>
+                </Fab>
+              </TableCell>
+              <TableCell>
+                <Fab>
+                  <DeleteIcon />
+                </Fab>
+              </TableCell>
+            </TableRow>
+>>>>>>> master
           </TableBody>
         </Table>
       </Paper>
