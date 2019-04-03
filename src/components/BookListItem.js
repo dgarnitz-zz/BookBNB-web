@@ -4,15 +4,21 @@ import TableRow from '@material-ui/core/TableRow';
 
 function BookListItem(props){
   let availableColumn = null;
-  if(props.available) {
-    availableColumn = <TableCell>{props.status}</TableCell>;
+  if(props.status) {
+    if(props.available){
+      availableColumn = <TableCell>Yes</TableCell>;
+    } else if(props.available != null && !props.available) {
+      availableColumn = <TableCell>No</TableCell>;
+    } else {
+      availableColumn = <TableCell></TableCell>;
+    }
   }
 
   return (
     <TableRow>
       <TableCell>{props.title}</TableCell>
       <TableCell>{props.author}</TableCell>
-      <TableCell>1st edition</TableCell>
+      <TableCell>{props.edition}</TableCell>
       {availableColumn}
     </TableRow>
   );

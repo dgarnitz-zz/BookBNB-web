@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import ProfileBooks from './../components/ProfileBooks';
 
 class Profile extends React.Component {
   state = { email: "", name: "", city: "" };
@@ -35,6 +36,7 @@ class Profile extends React.Component {
         <div>Name: {this.state.name}</div>
         <div>email: {this.state.email}</div>
         <div>City: {this.state.city}</div>
+        <ProfileBooks />
       </div>
     );
   }
