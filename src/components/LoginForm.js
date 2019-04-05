@@ -8,6 +8,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
+import { red } from "@material-ui/core/colors";
 
 const styles = theme => ({
   container: {
@@ -32,6 +33,8 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { errorMsg: "" };
+
     this.login = this.login.bind(this);
     this.sampleData = {
       email: "garnizzle@garnizzle.com",
@@ -49,19 +52,25 @@ class LoginForm extends Component {
 
     console.log(hashPassword);
 
+    var email = event.target.email.value;
+
     axios
       .post(
         `${"https://cors-anywhere.herokuapp.com/"}https://antondubek-bookbnb.herokuapp.com/login`,
         {
-          email: event.target.email.value,
+          email: email,
           password: hashPassword
         }
       )
       .then(response => {
         console.log(response);
+        if (response.status === 200) {
+          this.props.email(email);
+        }
       })
       .catch(error => {
         console.log(error);
+        this.setState({ errorMsg: "Email or password not recognised" });
       });
   }
 
@@ -81,7 +90,7 @@ class LoginForm extends Component {
             <Typography variant="h5" paragraph={true} className="login-prompt">
               Please Log In!
             </Typography>
-          </ Grid>
+          </Grid>
           <form className={classes.container} onSubmit={this.login}>
             <Grid item xs={6}>
               <FormControl margin="dense">
@@ -89,20 +98,20 @@ class LoginForm extends Component {
                   type="text"
                   label="Email:"
                   name="email"
-                  className = {classNames(classes.textField, classes.dense)}
-                  />
+                  className={classNames(classes.textField, classes.dense)}
+                />
               </FormControl>
-            </ Grid>
+            </Grid>
             <Grid item xs={6}>
               <FormControl margin="dense">
                 <TextField
                   type="text"
                   label="Password:"
                   name="password"
-                  className = {classNames(classes.textField, classes.dense)}
-                  />
+                  className={classNames(classes.textField, classes.dense)}
+                />
               </FormControl>
-            </ Grid>
+            </Grid>
             <Grid item xs={6}>
               <FormControl margin="dense">
                 <Button
@@ -110,13 +119,22 @@ class LoginForm extends Component {
                   variant="contained"
                   color="primary"
                   className={classes.registerButton}
-                  >
+                >
                   Login
                 </Button>
               </FormControl>
-            </ Grid>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                color="error"
+                variant="body1"
+                className={classNames(classes.textField)}
+              >
+                {this.state.errorMsg}
+              </Typography>
+            </Grid>
           </form>
-        </ Grid>
+        </Grid>
       </div>
     );
   }
