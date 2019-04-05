@@ -9,17 +9,6 @@ function FollowingItem(props){
       <TableCell>{props.name}</TableCell>
       <TableCell>{props.city}</TableCell>
       <TableCell>{props.rating}</TableCell>
-      <TableCell>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => {
-            console.log("Testing button for user: " + props.id);
-          }}
-        >
-          Manage
-        </Button>
-      </TableCell>
     </TableRow>
   );
 }
