@@ -11,8 +11,7 @@ import axios from "axios";
 
 
 class Following extends Component {
-  state = { exanple: [{name: 'Riad', city: 'Baku', rating: 2.5, id: 9}],
-          followers: [] };
+  state = { followers: [] };
 
   componentDidMount() {
     this.getFollowerData();
@@ -23,7 +22,7 @@ class Following extends Component {
 
     axios
       .post(
-        `${"https://cors-anywhere.herokuapp.com/"}https://antondubek-bookbnb.herokuapp.com/follow/fetchs`,
+        `${"https://cors-anywhere.herokuapp.com/"}https://antondubek-bookbnb.herokuapp.com/follow/fetch`,
         {
           email: email
         }

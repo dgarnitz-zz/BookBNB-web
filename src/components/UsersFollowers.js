@@ -23,7 +23,7 @@ class UsersFollowers extends Component {
 
     axios
       .post(
-        `${"https://cors-anywhere.herokuapp.com/"}https://antondubek-bookbnb.herokuapp.com/follow/fetchs`,
+        `${"https://cors-anywhere.herokuapp.com/"}https://antondubek-bookbnb.herokuapp.com/follow/following`,
         {
           email: email
         }
