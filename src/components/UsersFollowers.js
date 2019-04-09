@@ -11,8 +11,7 @@ import axios from "axios";
 
 
 class UsersFollowers extends Component {
-  state = { exanple: [{name: 'Riad', city: 'Baku', rating: 2.5, id: 9}],
-            followers: [] };
+  state = { followers: [] };
 
   componentDidMount() {
     this.getFollowerData();
