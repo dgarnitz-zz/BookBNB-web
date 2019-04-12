@@ -1,4 +1,5 @@
 import React from "react";
+import LoadingSpinner from "./LoadingSpinner";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
@@ -26,7 +27,14 @@ const styles = theme => ({
 });
 
 class RegisterForm extends React.Component {
-  state = { name: "", email: "", password: "", city: "", errorMsg: "" };
+  state = {
+    name: "",
+    email: "",
+    password: "",
+    city: "",
+    errorMsg: "",
+    loading: false
+  };
 
   onFormSubmit = event => {
     event.preventDefault();
@@ -35,6 +43,8 @@ class RegisterForm extends React.Component {
   };
 
   sendPostRequest = async () => {
+    this.setState({ loading: true });
+
     var hashPassword = require("crypto")
       .createHash("SHA1")
       .update(this.state.password, "utf-8")
@@ -52,12 +62,14 @@ class RegisterForm extends React.Component {
       )
       .then(response => {
         console.log(response);
+        this.setState({ loading: false });
         if (response.status === 200) {
           this.props.email(this.state.email);
         }
       })
       .catch(error => {
         console.log(error);
+        this.setState({ loading: false });
         this.setState({ errorMsg: "Registration failed" });
       });
   };
@@ -65,104 +77,112 @@ class RegisterForm extends React.Component {
   render() {
     const { classes } = this.props;
 
-    return (
-      <div className={classes.root}>
-        <Grid
-          container
-          spacing={16}
-          direction="column"
-          justify="space-evenly"
-          alignItems="center"
-        >
-          <Grid item xs={12}>
-            <Typography variant="h5" paragraph={true}>
-              Please enter your details below
-            </Typography>
-            <Typography variant="h6" paragraph={true}>
-              *All fields are mandatory*
-            </Typography>
-          </Grid>
-          <form
-            className={classes.container}
-            noValidate
-            autoComplete="off"
-            onSubmit={this.onFormSubmit}
+    if (this.state.loading) {
+      return (
+        <div>
+          <LoadingSpinner message="Logging In" />
+        </div>
+      );
+    } else {
+      return (
+        <div className={classes.root}>
+          <Grid
+            container
+            spacing={16}
+            direction="column"
+            justify="space-evenly"
+            alignItems="center"
           >
-            <Grid item xs={6}>
-              <TextField
-                id="name-input"
-                label="Name"
-                className={classNames(classes.textField, classes.dense)}
-                margin="dense"
-                variant="outlined"
-                onChange={e => this.setState({ name: e.target.value })}
-                value={this.state.name}
-              />
-            </Grid>
-
-            <Grid item xs={6}>
-              <TextField
-                id="email-input"
-                label="Email"
-                className={classes.textField}
-                type="email"
-                name="email"
-                autoComplete="email"
-                margin="normal"
-                variant="outlined"
-                onChange={e => this.setState({ email: e.target.value })}
-                value={this.state.email}
-              />
-            </Grid>
-
-            <Grid item xs={6}>
-              <TextField
-                id="password-input"
-                label="Password"
-                className={classes.textField}
-                type="password"
-                autoComplete="current-password"
-                margin="normal"
-                variant="outlined"
-                onChange={e => this.setState({ password: e.target.value })}
-                value={this.state.password}
-              />
-            </Grid>
-
-            <Grid item xs={6}>
-              <TextField
-                id="city-input"
-                label="City"
-                className={classNames(classes.textField, classes.dense)}
-                margin="dense"
-                variant="outlined"
-                onChange={e => this.setState({ city: e.target.value })}
-                value={this.state.city}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                variant="contained"
-                type="submit"
-                color="primary"
-                className={classes.registerButton}
-              >
-                Register
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography
-                variant="body1"
-                color="error"
-                className={classNames(classes.textField)}
-              >
-                {this.state.errorMsg}
+            <Grid item xs={12}>
+              <Typography variant="h5" paragraph={true}>
+                Please enter your details below
+              </Typography>
+              <Typography variant="h6" paragraph={true}>
+                *All fields are mandatory*
               </Typography>
             </Grid>
-          </form>
-        </Grid>
-      </div>
-    );
+            <form
+              className={classes.container}
+              noValidate
+              autoComplete="off"
+              onSubmit={this.onFormSubmit}
+            >
+              <Grid item xs={6}>
+                <TextField
+                  id="name-input"
+                  label="Name"
+                  className={classNames(classes.textField, classes.dense)}
+                  margin="dense"
+                  variant="outlined"
+                  onChange={e => this.setState({ name: e.target.value })}
+                  value={this.state.name}
+                />
+              </Grid>
+
+              <Grid item xs={6}>
+                <TextField
+                  id="email-input"
+                  label="Email"
+                  className={classes.textField}
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  margin="normal"
+                  variant="outlined"
+                  onChange={e => this.setState({ email: e.target.value })}
+                  value={this.state.email}
+                />
+              </Grid>
+
+              <Grid item xs={6}>
+                <TextField
+                  id="password-input"
+                  label="Password"
+                  className={classes.textField}
+                  type="password"
+                  autoComplete="current-password"
+                  margin="normal"
+                  variant="outlined"
+                  onChange={e => this.setState({ password: e.target.value })}
+                  value={this.state.password}
+                />
+              </Grid>
+
+              <Grid item xs={6}>
+                <TextField
+                  id="city-input"
+                  label="City"
+                  className={classNames(classes.textField, classes.dense)}
+                  margin="dense"
+                  variant="outlined"
+                  onChange={e => this.setState({ city: e.target.value })}
+                  value={this.state.city}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  className={classes.registerButton}
+                >
+                  Register
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography
+                  variant="body1"
+                  color="error"
+                  className={classNames(classes.textField)}
+                >
+                  {this.state.errorMsg}
+                </Typography>
+              </Grid>
+            </form>
+          </Grid>
+        </div>
+      );
+    }
   }
 }
 

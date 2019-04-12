@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "../App.css";
+import LoadingSpinner from "./LoadingSpinner";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -8,7 +9,6 @@ import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
-import { red } from "@material-ui/core/colors";
 
 const styles = theme => ({
   container: {
@@ -33,17 +33,15 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { errorMsg: "" };
+    this.state = { errorMsg: "", loading: false };
 
     this.login = this.login.bind(this);
-    this.sampleData = {
-      email: "garnizzle@garnizzle.com",
-      password: "garnizzle"
-    };
   }
 
   login(event) {
     event.preventDefault();
+
+    this.setState({ loading: true });
 
     var hashPassword = require("crypto")
       .createHash("SHA1")
@@ -63,6 +61,7 @@ class LoginForm extends Component {
         }
       )
       .then(response => {
+        this.setState({ loading: false });
         console.log(response);
         if (response.status === 200) {
           this.props.email(email);
@@ -70,6 +69,7 @@ class LoginForm extends Component {
       })
       .catch(error => {
         console.log(error);
+        this.setState({ loading: false });
         this.setState({ errorMsg: "Email or password not recognised" });
       });
   }
@@ -77,66 +77,78 @@ class LoginForm extends Component {
   render() {
     const { classes } = this.props;
 
-    return (
-      <div className={classes.root}>
-        <Grid
-          container
-          spacing={16}
-          direction="column"
-          justify="space-evenly"
-          alignItems="center"
-        >
-          <Grid item xs={12}>
-            <Typography variant="h5" paragraph={true} className="login-prompt">
-              Please Log In!
-            </Typography>
-          </Grid>
-          <form className={classes.container} onSubmit={this.login}>
-            <Grid item xs={6}>
-              <FormControl margin="dense">
-                <TextField
-                  type="text"
-                  label="Email:"
-                  name="email"
-                  className={classNames(classes.textField, classes.dense)}
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={6}>
-              <FormControl margin="dense">
-                <TextField
-                  type="text"
-                  label="Password:"
-                  name="password"
-                  className={classNames(classes.textField, classes.dense)}
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={6}>
-              <FormControl margin="dense">
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  className={classes.registerButton}
-                >
-                  Login
-                </Button>
-              </FormControl>
-            </Grid>
-            <Grid item xs={6}>
+    if (this.state.loading) {
+      return (
+        <div>
+          <LoadingSpinner message="Logging In" />
+        </div>
+      );
+    } else {
+      return (
+        <div className={classes.root}>
+          <Grid
+            container
+            spacing={16}
+            direction="column"
+            justify="space-evenly"
+            alignItems="center"
+          >
+            <Grid item xs={12}>
               <Typography
-                color="error"
-                variant="body1"
-                className={classNames(classes.textField)}
+                variant="h5"
+                paragraph={true}
+                className="login-prompt"
               >
-                {this.state.errorMsg}
+                Please Log In!
               </Typography>
             </Grid>
-          </form>
-        </Grid>
-      </div>
-    );
+            <form className={classes.container} onSubmit={this.login}>
+              <Grid item xs={6}>
+                <FormControl margin="dense">
+                  <TextField
+                    type="text"
+                    label="Email:"
+                    name="email"
+                    className={classNames(classes.textField, classes.dense)}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                <FormControl margin="dense">
+                  <TextField
+                    type="text"
+                    label="Password:"
+                    name="password"
+                    className={classNames(classes.textField, classes.dense)}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                <FormControl margin="dense">
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    className={classes.registerButton}
+                  >
+                    Login
+                  </Button>
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography
+                  color="error"
+                  variant="body1"
+                  className={classNames(classes.textField)}
+                >
+                  {this.state.errorMsg}
+                </Typography>
+              </Grid>
+            </form>
+          </Grid>
+        </div>
+      );
+    }
   }
 }
 
