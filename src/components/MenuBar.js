@@ -67,14 +67,26 @@ function MenuBarMat(props) {
               <Grid>{browseBtn(classes)}</Grid>
 
               <Grid>
-                <NavLink to="/mybooks">
+                <NavLink to="/profile">
                   <Button
                     color="default"
                     className={classes.button}
                     variant="outlined"
                     size="large"
                   >
-                    MyBooks
+                    My Books
+                  </Button>
+                </NavLink>
+              </Grid>
+              <Grid>
+                <NavLink to="/followers">
+                  <Button
+                    color="default"
+                    className={classes.button}
+                    variant="outlined"
+                    size="large"
+                  >
+                    Followers
                   </Button>
                 </NavLink>
               </Grid>

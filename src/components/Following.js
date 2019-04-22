@@ -6,13 +6,37 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import FollowingItem from "./FollowingItem";
+import { read_cookie } from "sfcookies";
+import axios from "axios";
 
 
 class Following extends Component {
-  state = { followers: [
-    {name: 'Garnizzle', city: 'Garnizzle Town', rating: 4.5, id: 2},
-    {name: 'Ant', city: 'Newcastle', rating: 1, id: 5}
-  ] };
+  state = { followers: [] };
+
+  componentDidMount() {
+    this.getFollowerData();
+  }
+
+  getFollowerData = () => {
+    var email = read_cookie("email");
+
+    axios
+      .post(
+        `${"https://cors-anywhere.herokuapp.com/"}https://antondubek-bookbnb.herokuapp.com/follow/fetch`,
+        {
+          email: email
+        }
+      )
+      .then(response => {
+        console.log(response);
+        this.setState({
+          followers: response.data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   render() {
     return (
@@ -23,7 +47,6 @@ class Following extends Component {
               <TableCell>Name</TableCell>
               <TableCell>Location</TableCell>
               <TableCell>Rating</TableCell>
-              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -33,8 +56,7 @@ class Following extends Component {
                   name={follower.name}
                   city={follower.city}
                   rating={follower.rating}
-                  key={follower.id}
-                  id={follower.id}
+                  key={follower.email}
                 />
               );
             })}

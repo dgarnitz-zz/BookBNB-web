@@ -7,6 +7,7 @@ import Tab from "@material-ui/core/Tab";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import "../App.css";
+import { read_cookie } from "sfcookies";
 
 function TabContainer(props) {
   return (
@@ -15,6 +16,7 @@ function TabContainer(props) {
     </Typography>
   );
 }
+
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired
@@ -31,7 +33,6 @@ class Followers extends React.Component {
 
   render() {
     const { value } = this.state;
-
     return (
       <div className="followers-tab-box">
         <AppBar position="static" color="default">
@@ -57,8 +58,7 @@ class Followers extends React.Component {
             <Following />
           </TabContainer>
         )}
-      </div>
-    );
+      </
   }
 }
 
