@@ -17,16 +17,6 @@ function TabContainer(props) {
   );
 }
 
-function checkLoggedIn() {
-  if (typeof read_cookie("email") === "string") {
-    return true;
-  }
-  return false;
-  console.log("checkLoggedIn was called");
-}
-
-var loggedIn = false;
-console.log("value was switched back");
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired
@@ -43,42 +33,33 @@ class Followers extends React.Component {
 
   render() {
     const { value } = this.state;
-
-    loggedIn = checkLoggedIn();
-
-    if (loggedIn) {
-      return (
-        <div className="followers-tab-box">
-          <AppBar position="static" color="default">
-            <Tabs
-              value={value}
-              onChange={this.handleChange}
-              variant="fullWidth"
-              indicatorColor="primary"
-              textColor="primary"
-              centered
-            >
-              <Tab label="My Followers" />
-              <Tab label="Who I Follow" />
-            </Tabs>
-          </AppBar>
-          {value === 0 && (
-            <TabContainer>
-              <UsersFollowers />
-            </TabContainer>
-          )}
-          {value === 1 && (
-            <TabContainer>
-              <Following />
-            </TabContainer>
-          )}
-        </div>
-      );
-    } else {
-        return (
-          <h1>This needs to redirect to login / create account </h1>
-        );
-    }
+    return (
+      <div className="followers-tab-box">
+        <AppBar position="static" color="default">
+          <Tabs
+            value={value}
+            onChange={this.handleChange}
+            variant="fullWidth"
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="My Followers" />
+            <Tab label="Who I Follow" />
+          </Tabs>
+        </AppBar>
+        {value === 0 && (
+          <TabContainer>
+            <UsersFollowers />
+          </TabContainer>
+        )}
+        {value === 1 && (
+          <TabContainer>
+            <Following />
+          </TabContainer>
+        )}
+      </div>
+    );
   }
 }
 
