@@ -58,8 +58,7 @@ class Followers extends React.Component {
             <Following />
           </TabContainer>
         )}
-      </div>
-    );
+      </
   }
 }
 
