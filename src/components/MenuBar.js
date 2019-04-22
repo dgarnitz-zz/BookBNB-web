@@ -119,6 +119,18 @@ class MenuBar extends React.Component {
                   </Button>
                 </NavLink>
               </Grid>
+              <Grid>
+                <NavLink to="/followers">
+                  <Button
+                    color="default"
+                    className={classes.button}
+                    variant="outlined"
+                    size="large"
+                  >
+                    Followers
+                  </Button>
+                </NavLink>
+              </Grid>
             </Toolbar>
           </AppBar>
         </div>
